@@ -12,6 +12,8 @@ import '../../features/user/ai/screens/ai_planner_flow_screen.dart';
 import '../../features/user/ai/screens/ai_generated_plan_screen.dart';
 import '../../models/ai/models.dart';
 
+import '../../features/admin/admin_dashboard_screen.dart';
+
 class PlaceholderScreen extends StatelessWidget {
   final String title;
   const PlaceholderScreen({super.key, required this.title});
@@ -34,7 +36,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/admin',
-      builder: (context, state) => const PlaceholderScreen(title: 'Admin Panel'),
+      builder: (context, state) => const AdminDashboardScreen(),
     ),
     GoRoute(
       path: '/ai-planner',
