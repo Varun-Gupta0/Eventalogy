@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ultimate AI Wedding Architect Journey</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "brand-black": "#07070A",
+                        "brand-yellow": "#FFC500",
+                        "brand-grey": "#998866",
+                        "brand-surface": "#121215",
+                        "brand-surface-light": "#1c1c1f",
+                        "secondary-bg": "#404040",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(255, 197, 0, 0.15)',
+                        'glow-strong': '0 0 30px rgba(255, 197, 0, 0.25)',
+                        'card': '0 8px 32px rgba(0, 0, 0, 0.4)',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07070A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-input {
+            background: rgba(20, 20, 23, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-accent {
+            background: rgba(255, 197, 0, 0.08);
+            border: 1px solid rgba(255, 197, 0, 0.2);
+        }
+        .ai-bubble {
+            background: #1c1c1f;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom-left-radius: 4px;
+        }
+        .user-bubble {
+            background: #2a2a2e;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom-right-radius: 4px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .progress-gradient {
+            background: linear-gradient(90deg, #FFC500 0%, #FFD642 100%);
+        }
+    </style>
+<style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-brand-black font-display text-gray-100 min-h-screen flex justify-center overflow-hidden">
+<div class="w-full max-w-md h-[100dvh] flex flex-col relative bg-brand-black shadow-2xl overflow-hidden mx-auto border-x border-gray-800/30">
+<header class="glass-panel sticky top-0 z-30 px-5 pt-5 pb-4 flex flex-col gap-4 border-b border-white/5 bg-brand-black/90">
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-3">
+<button class="text-white/70 hover:text-brand-yellow transition-colors">
+<span class="material-icons text-xl">arrow_back_ios_new</span>
+</button>
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-yellow to-yellow-700 p-[1px] shadow-glow">
+<div class="w-full h-full rounded-full bg-brand-black flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-yellow text-lg">smart_toy</span>
+</div>
+</div>
+<div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-brand-black"></div>
+</div>
+<div>
+<h1 class="text-base font-bold text-white tracking-wide">Eventology Architect</h1>
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] text-brand-grey font-medium uppercase tracking-wider">Planning Session</span>
+</div>
+</div>
+</div>
+</div>
+<button class="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/80">
+<span class="material-icons text-xl">more_vert</span>
+</button>
+</div>
+<div class="w-full space-y-2">
+<div class="flex justify-between items-center text-[10px] font-semibold tracking-wider uppercase">
+<span class="text-brand-yellow flex items-center gap-1.5">
+<span class="material-icons text-[10px]">auto_awesome</span>
+                    Curation Progress
+                </span>
+<span class="text-brand-grey">65% Complete</span>
+</div>
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full w-[65%] progress-gradient rounded-full shadow-[0_0_10px_rgba(255,197,0,0.5)] relative">
+<div class="absolute right-0 top-0 bottom-0 w-2 bg-white/50 blur-[2px]"></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto p-4 space-y-6 scroll-smooth pb-32 relative">
+<div class="fixed top-1/3 left-0 w-64 h-64 bg-brand-yellow/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="flex justify-center">
+<span class="text-[10px] font-bold tracking-widest text-brand-grey uppercase bg-brand-surface px-3 py-1 rounded-full border border-white/5">Today</span>
+</div>
+<div class="flex gap-3 justify-end">
+<div class="user-bubble p-4 rounded-2xl max-w-[85%] shadow-lg">
+<p class="text-sm text-white leading-relaxed font-medium">
+                    I want to plan a Grand 10 Lakh Wedding for 300 guests. It should feel luxurious but stay strictly within budget.
+                </p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-surface border border-white/10 flex items-center justify-center self-end mb-1 shadow-glow">
+<span class="material-symbols-outlined text-brand-yellow text-sm">smart_toy</span>
+</div>
+<div class="space-y-4 max-w-[95%] w-full">
+<div class="ai-bubble p-4 rounded-2xl shadow-lg border-l-2 border-l-brand-yellow">
+<p class="text-sm text-white leading-relaxed font-medium">
+                        Excellent choice! A 10 Lakh budget for 300 guests is challenging but absolutely doable with smart allocation. Here is your optimized 'Budget Mastery' breakdown:
+                    </p>
+</div>
+<div class="bg-brand-surface border border-white/10 rounded-2xl p-4 shadow-card">
+<div class="flex justify-between items-center mb-4">
+<div>
+<h3 class="text-sm font-bold text-white">Budget Mastery Allocation</h3>
+<p class="text-[10px] text-brand-grey font-medium uppercase tracking-wider">Total: ₹10,00,000</p>
+</div>
+<div class="flex items-center gap-1 bg-white/5 px-2 py-1 rounded border border-white/5">
+<span class="material-icons text-[10px] text-brand-yellow">people</span>
+<span class="text-xs font-bold text-white">300 Pax</span>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-gray-400">Venue &amp; Stay</span>
+<span class="text-white font-semibold">₹3.5L <span class="text-gray-500 font-normal">(35%)</span></span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-purple-500/80 w-[35%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-gray-400">Catering (Premium)</span>
+<span class="text-white font-semibold">₹4.5L <span class="text-gray-500 font-normal">(45%)</span></span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-brand-yellow/80 w-[45%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-gray-400">Decor &amp; Experience</span>
+<span class="text-white font-semibold">₹2.0L <span class="text-gray-500 font-normal">(20%)</span></span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-green-500/80 w-[20%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-3 justify-end">
+<div class="user-bubble p-3 rounded-2xl max-w-[85%] shadow-lg space-y-2">
+<p class="text-sm text-white leading-relaxed font-medium">
+                    This breakdown looks good. For the venue, I'm thinking something open but royal. Like this:
+                </p>
+<div class="relative rounded-lg overflow-hidden border border-white/10 group">
+<div class="aspect-video bg-gray-800 flex items-center justify-center">
+<span class="material-icons text-white/30 text-4xl">image</span>
+</div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs font-medium text-white">Reference Image</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-surface border border-white/10 flex items-center justify-center self-end mb-1 shadow-glow">
+<span class="material-symbols-outlined text-brand-yellow text-sm">smart_toy</span>
+</div>
+<div class="space-y-4 max-w-[100%] w-full overflow-hidden">
+<div class="ai-bubble p-4 rounded-2xl shadow-lg border-l-2 border-l-brand-yellow max-w-[90%]">
+<p class="text-sm text-white leading-relaxed font-medium">
+                        Understood. Based on your visual input and budget, here are top-rated venues in Raipur that fit the 'Royal Open-Air' vibe within ₹3.5L:
+                    </p>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
+<div class="min-w-[240px] bg-brand-surface border border-white/10 rounded-xl overflow-hidden snap-center flex-shrink-0 relative">
+<div class="h-32 bg-gray-800 relative">
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons text-brand-yellow text-[10px]">star</span>
+<span class="text-[10px] font-bold text-white">4.8</span>
+</div>
+<div class="w-full h-full bg-gradient-to-b from-transparent to-black/80 absolute bottom-0"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<p class="text-xs font-bold">The Royal Gardens</p>
+<p class="text-[10px] text-gray-300">Raipur • Capacity 500</p>
+</div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-center text-[10px] mb-2">
+<span class="text-gray-400">Est. Cost</span>
+<span class="text-brand-yellow font-bold">₹3.2 Lakhs</span>
+</div>
+<button class="w-full py-1.5 bg-white/5 hover:bg-white/10 text-white text-[10px] font-semibold rounded border border-white/10 transition-colors">View Profile</button>
+</div>
+</div>
+<div class="min-w-[240px] bg-brand-surface border border-white/10 rounded-xl overflow-hidden snap-center flex-shrink-0 relative">
+<div class="h-32 bg-gray-800 relative">
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons text-brand-yellow text-[10px]">star</span>
+<span class="text-[10px] font-bold text-white">4.6</span>
+</div>
+<div class="w-full h-full bg-gradient-to-b from-transparent to-black/80 absolute bottom-0"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<p class="text-xs font-bold">Heritage Courtyard</p>
+<p class="text-[10px] text-gray-300">Raipur • Capacity 350</p>
+</div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-center text-[10px] mb-2">
+<span class="text-gray-400">Est. Cost</span>
+<span class="text-brand-yellow font-bold">₹3.4 Lakhs</span>
+</div>
+<button class="w-full py-1.5 bg-white/5 hover:bg-white/10 text-white text-[10px] font-semibold rounded border border-white/10 transition-colors">View Profile</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-surface border border-white/10 flex items-center justify-center self-end mb-1 shadow-glow">
+<span class="material-symbols-outlined text-brand-yellow text-sm">psychology</span>
+</div>
+<div class="space-y-4 max-w-[95%] w-full">
+<div class="ai-bubble p-4 rounded-2xl shadow-lg border-l-2 border-l-brand-yellow">
+<p class="text-sm text-white leading-relaxed font-medium">
+                        Before we lock the venue, let's define the aesthetic. This impacts your decor budget heavily. Which resonates more?
+                    </p>
+</div>
+<div class="flex gap-2 w-full">
+<button class="group flex-1 relative overflow-hidden rounded-xl border border-white/10 bg-brand-surface hover:bg-white/5 transition-all duration-300 p-3 text-left hover:border-brand-yellow/30 focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow ring-offset-0">
+<div class="flex items-center justify-between mb-1">
+<span class="material-symbols-outlined text-brand-yellow group-hover:scale-110 transition-transform text-lg">temple_hindu</span>
+<div class="w-4 h-4 rounded-full border border-white/20 flex items-center justify-center bg-brand-yellow border-brand-yellow transition-all">
+<span class="material-icons text-black text-[8px]">check</span>
+</div>
+</div>
+<h3 class="text-xs font-bold text-white mb-0.5">Traditional Grandeur</h3>
+<p class="text-[10px] text-gray-400 leading-tight">Rich marigolds &amp; heritage props</p>
+</button>
+<button class="group flex-1 relative overflow-hidden rounded-xl border border-white/10 bg-brand-surface hover:bg-white/5 transition-all duration-300 p-3 text-left hover:border-brand-yellow/30 opacity-60">
+<div class="flex items-center justify-between mb-1">
+<span class="material-symbols-outlined text-blue-300 group-hover:text-brand-yellow group-hover:scale-110 transition-transform text-lg">diamond</span>
+<div class="w-4 h-4 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-brand-yellow group-hover:border-brand-yellow transition-all">
+</div>
+</div>
+<h3 class="text-xs font-bold text-white mb-0.5">Modern Minimalist</h3>
+<p class="text-[10px] text-gray-400 leading-tight">Pastels, crystals &amp; sleek lines</p>
+</button>
+</div>
+</div>
+</div>
+<div class="flex gap-3 justify-end">
+<div class="user-bubble p-4 rounded-2xl max-w-[85%] shadow-lg">
+<p class="text-sm text-white leading-relaxed font-medium">
+                    Definitely Traditional Grandeur. It fits the family expectations better.
+                </p>
+</div>
+</div>
+<div class="flex gap-3 pb-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-surface border border-white/10 flex items-center justify-center self-end mb-1 shadow-glow">
+<span class="material-symbols-outlined text-brand-yellow text-sm">restaurant_menu</span>
+</div>
+<div class="space-y-4 max-w-[95%] w-full">
+<div class="ai-bubble p-4 rounded-2xl shadow-lg border-l-2 border-l-brand-yellow">
+<p class="text-sm text-white leading-relaxed font-medium">
+                        Perfect choice. 'Traditional Grandeur' pairs beautifully with a rich North Indian spread. Here is a curated menu fitting your ₹4.5L catering budget:
+                    </p>
+</div>
+<div class="bg-brand-surface border border-white/10 rounded-2xl overflow-hidden shadow-card">
+<div class="p-4 border-b border-white/5 bg-gradient-to-r from-brand-surface to-brand-surface-light">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-sm font-bold text-white">The Royal Feast Menu</h3>
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-green-900/40 text-green-400 border border-green-800/50">Vegetarian Premium</span>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-brand-yellow">₹1,500<span class="text-[10px] text-gray-500 font-normal">/plate</span></p>
+<p class="text-[10px] text-gray-500">300 Guests</p>
+</div>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center flex-shrink-0">
+<span class="material-icons text-brand-yellow/70 text-lg">local_cafe</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white">Welcome Drinks</p>
+<p class="text-[10px] text-gray-400">Thandai, Rose Sherbet, Masala Chai</p>
+</div>
+</div>
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center flex-shrink-0">
+<span class="material-icons text-brand-yellow/70 text-lg">tapas</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white">Starters (4)</p>
+<p class="text-[10px] text-gray-400">Hara Bhara Kebab, Paneer Tikka...</p>
+</div>
+</div>
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center flex-shrink-0">
+<span class="material-icons text-brand-yellow/70 text-lg">dinner_dining</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white">Main Course (7)</p>
+<p class="text-[10px] text-gray-400">Dal Makhani, Shahi Paneer, Naan Basket...</p>
+</div>
+</div>
+</div>
+<div class="p-3 bg-white/5 flex justify-between items-center">
+<span class="text-[10px] text-brand-grey uppercase tracking-wider font-semibold">Total: ₹4,50,000</span>
+<button class="text-[10px] text-brand-yellow font-bold uppercase hover:text-white transition-colors">Customize Menu</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-3 items-center opacity-0 animate-fade-in" style="animation: fadeIn 0.5s ease-out forwards; animation-delay: 0.5s;">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-surface border border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-yellow/50 text-sm">smart_toy</span>
+</div>
+<div class="bg-brand-surface-light border border-white/5 px-4 py-3 rounded-2xl rounded-bl-sm flex gap-1">
+<span class="w-1.5 h-1.5 bg-gray-500 rounded-full typing-dot"></span>
+<span class="w-1.5 h-1.5 bg-gray-500 rounded-full typing-dot"></span>
+<span class="w-1.5 h-1.5 bg-gray-500 rounded-full typing-dot"></span>
+</div>
+</div>
+</main>
+<div class="glass-input absolute bottom-0 left-0 right-0 p-4 pt-4 pb-6 z-40 bg-brand-black/90">
+<div class="flex items-end gap-2 max-w-full">
+<button class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 transition-colors flex-shrink-0 border border-white/10">
+<span class="material-icons text-xl">add_photo_alternate</span>
+</button>
+<div class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-2.5 flex items-center gap-2 focus-within:border-brand-yellow/50 transition-colors">
+<input class="flex-1 bg-transparent border-none text-white placeholder-gray-500 focus:ring-0 text-sm p-0 font-medium" placeholder="Type your response..." type="text"/>
+<button class="text-gray-400 hover:text-white transition-colors">
+<span class="material-icons text-xl">mic</span>
+</button>
+</div>
+<button class="w-10 h-10 rounded-full bg-brand-yellow hover:bg-yellow-400 text-brand-black flex items-center justify-center transition-colors shadow-glow flex-shrink-0">
+<span class="material-icons text-xl transform -rotate-45 ml-1">send</span>
+</button>
+</div>
+<div class="text-center mt-3">
+<p class="text-[10px] text-brand-grey/50">AI can make mistakes. Please verify critical details.</p>
+</div>
+</div>
+</div>
+<script>
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+    document.head.appendChild(styleSheet);
+</script>
+</body></html>

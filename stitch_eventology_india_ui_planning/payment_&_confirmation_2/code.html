@@ -1,0 +1,190 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>Eventology India - Payment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-bg: #07070A;
+        --secondary-bg: #404040;
+        --accent-yellow: #FFC500;
+        --text-main: #FFFFFF;
+        --text-secondary: #998866;
+        --success-green: #17A55C;
+        --card-bg: #1c1c1e;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .step-completed {
+        background-color: var(--accent-yellow);
+        color: var(--primary-bg);
+      }
+      .step-active {
+        border-color: var(--accent-yellow);
+        color: var(--accent-yellow);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[var(--primary-bg)] text-[var(--text-main)]">
+<div class="relative flex size-full min-h-screen flex-col justify-between overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+<div>
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-[var(--text-main)] flex size-12 shrink-0 items-center">
+<span class="material-symbols-outlined cursor-pointer">arrow_back</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12 uppercase tracking-widest">Payment</h2>
+</div>
+<div class="px-6 py-6">
+<div class="relative flex items-center justify-between w-full">
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-[var(--accent-yellow)] -translate-y-1/2 z-0"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-7 rounded-full step-completed flex items-center justify-center text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="text-[10px] mt-1 text-[var(--text-secondary)]">Plan</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-7 rounded-full step-completed flex items-center justify-center text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="text-[10px] mt-1 text-[var(--text-secondary)]">Venue</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-7 rounded-full step-completed flex items-center justify-center text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="text-[10px] mt-1 text-[var(--text-secondary)]">Vendors</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-7 rounded-full step-completed flex items-center justify-center text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="text-[10px] mt-1 text-[var(--text-secondary)]">Review</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-7 rounded-full bg-[var(--primary-bg)] border-2 border-[var(--accent-yellow)] text-[var(--accent-yellow)] flex items-center justify-center text-xs font-bold">5</div>
+<span class="text-[10px] mt-1 text-[var(--accent-yellow)] font-bold">Pay</span>
+</div>
+</div>
+</div>
+<h3 class="text-lg font-bold px-4 pb-2 pt-4">Payment Options</h3>
+<div class="flex flex-col gap-3 p-4">
+<label class="group relative flex items-center justify-between rounded-xl border border-[var(--secondary-bg)] bg-[var(--secondary-bg)] bg-opacity-20 px-4 h-16 cursor-pointer has-[:checked]:border-[var(--accent-yellow)]">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[var(--text-main)]">Pay in Full</span>
+<span class="text-xs text-[var(--text-secondary)]">Settlement of entire balance</span>
+</div>
+<input checked="" class="w-5 h-5 accent-[var(--accent-yellow)] border-none bg-zinc-800" name="payment_plan" type="radio"/>
+</label>
+<label class="group relative flex items-center justify-between rounded-xl border border-[var(--secondary-bg)] bg-[var(--secondary-bg)] bg-opacity-20 px-4 h-16 cursor-pointer has-[:checked]:border-[var(--accent-yellow)]">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[var(--text-main)]">Split Pay (20:80)</span>
+<span class="text-xs text-[var(--text-secondary)]">20% deposit now, balance later</span>
+</div>
+<input class="w-5 h-5 accent-[var(--accent-yellow)] border-none bg-zinc-800" name="payment_plan" type="radio"/>
+</label>
+<label class="group relative flex items-center justify-between rounded-xl border border-[var(--secondary-bg)] bg-[var(--secondary-bg)] bg-opacity-20 px-4 h-16 cursor-pointer has-[:checked]:border-[var(--accent-yellow)]">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[var(--text-main)]">Partial Pay (50:50)</span>
+<span class="text-xs text-[var(--text-secondary)]">Half now, half later</span>
+</div>
+<input class="w-5 h-5 accent-[var(--accent-yellow)] border-none bg-zinc-800" name="payment_plan" type="radio"/>
+</label>
+</div>
+<h3 class="text-lg font-bold px-4 pb-2 pt-4">Select Method</h3>
+<div class="flex flex-col gap-3 px-4 pb-8">
+<div class="flex items-center justify-between bg-[var(--secondary-bg)] bg-opacity-20 rounded-xl px-4 py-4 cursor-pointer hover:bg-opacity-30 transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-white/10 rounded-lg p-2 flex items-center justify-center size-10">
+<span class="material-symbols-outlined text-[var(--accent-yellow)]">qr_code_scanner</span>
+</div>
+<div class="flex flex-col">
+<p class="text-[var(--text-main)] text-base font-bold">UPI</p>
+<div class="flex items-center gap-2 mt-1">
+<p class="text-[var(--text-secondary)] text-xs">Google Pay</p>
+<span class="text-[var(--text-secondary)] text-[8px]">•</span>
+<p class="text-[var(--text-secondary)] text-xs">PhonePe</p>
+<span class="text-[var(--text-secondary)] text-[8px]">•</span>
+<p class="text-[var(--text-secondary)] text-xs">Paytm</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[var(--text-secondary)]">chevron_right</span>
+</div>
+<div class="flex items-center justify-between bg-[var(--secondary-bg)] bg-opacity-20 rounded-xl px-4 py-4 cursor-pointer hover:bg-opacity-30 transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-white/10 rounded-lg p-2 flex items-center justify-center size-10">
+<span class="material-symbols-outlined text-[var(--accent-yellow)]">credit_card</span>
+</div>
+<div class="flex flex-col">
+<p class="text-[var(--text-main)] text-base font-bold">Debit / Credit cards</p>
+<div class="flex items-center gap-2 mt-1">
+<p class="text-[var(--text-secondary)] text-xs">Visa</p>
+<span class="text-[var(--text-secondary)] text-[8px]">•</span>
+<p class="text-[var(--text-secondary)] text-xs">Mastercard</p>
+<span class="text-[var(--text-secondary)] text-[8px]">•</span>
+<p class="text-[var(--text-secondary)] text-xs">RuPay</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[var(--text-secondary)]">chevron_right</span>
+</div>
+<div class="flex items-center justify-between bg-[var(--secondary-bg)] bg-opacity-20 rounded-xl px-4 py-4 cursor-pointer hover:bg-opacity-30 transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-white/10 rounded-lg p-2 flex items-center justify-center size-10">
+<span class="material-symbols-outlined text-[var(--accent-yellow)]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<p class="text-[var(--text-main)] text-base font-bold">Wallet</p>
+<div class="flex items-center gap-2 mt-1">
+<p class="text-[var(--text-secondary)] text-xs">Paytm</p>
+<span class="text-[var(--text-secondary)] text-[8px]">•</span>
+<p class="text-[var(--text-secondary)] text-xs">PhonePe</p>
+<span class="text-[var(--text-secondary)] text-[8px]">•</span>
+<p class="text-[var(--text-secondary)] text-xs">Cred Pay</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[var(--text-secondary)]">chevron_right</span>
+</div>
+<div class="flex items-center justify-between bg-[var(--secondary-bg)] bg-opacity-20 rounded-xl px-4 py-4 cursor-pointer hover:bg-opacity-30 transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-white/10 rounded-lg p-2 flex items-center justify-center size-10">
+<span class="material-symbols-outlined text-[var(--accent-yellow)]">account_balance</span>
+</div>
+<div class="flex flex-col">
+<p class="text-[var(--text-main)] text-base font-bold">Net Banking</p>
+<p class="text-[var(--text-secondary)] text-xs mt-1">All major banks supported</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[var(--text-secondary)]">chevron_right</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex px-4 pt-4 pb-8">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 flex-1 bg-[var(--accent-yellow)] text-[var(--primary-bg)] text-base font-black leading-normal tracking-[0.05em] uppercase shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/30 transition-shadow">
+<span class="truncate">Finalize &amp; Book</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

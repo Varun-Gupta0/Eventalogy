@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Lead &amp; Bidding Hub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FFC500",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#07070A",
+                        "surface-dark": "#121214",
+                        "surface-highlight": "#1C1C1E",
+                        "text-secondary": "#A1A1AA",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Space Grotesk", "Noto Sans", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }.bid-input { display: none; }
+        .bid-trigger:focus-within .bid-input,
+        .bid-trigger:active .bid-input { display: block; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark text-white min-h-screen flex flex-col pb-28">
+<div class="sticky top-0 z-50 bg-background-dark/95 backdrop-blur-md border-b border-white/5">
+<div class="flex items-center p-4 justify-between">
+<button class="text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-white text-base font-bold leading-tight tracking-tight flex-1 text-center">Vendor Lead Hub</h2>
+<div class="flex w-10 items-center justify-end">
+<div class="relative">
+<span class="material-symbols-outlined text-white">notifications</span>
+<span class="absolute top-0 right-0 h-2 w-2 bg-primary rounded-full border border-background-dark"></span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-center bg-cover border border-white/10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-n-pf8coweYL1zASB5bYHNbjRSu-a-_kS1xp52Y6ta0eioyWHoCdmOacToCVyHwESxt3h6jvRedV0Ol6hh83Whz3K6y8EbrnoMNf_fMW7yj2lH5XifgoDTFpokZMIh65Vd0xLChgFpSJEFI4uytUttouMcDe8UJ7UUjlof3Mw9cdKycv68T47dNSb7VPlBFNzTM6VDcBNbouLHNBIMVcWaJELTTn_xiROJITGz_q99fAzyVi0omMRTmeQudPcLtmzeJDYGJRA9A");'></div>
+<div>
+<div class="flex items-center gap-1">
+<span class="text-sm font-bold">Eventology Partner</span>
+<span class="material-symbols-outlined text-primary text-[14px] fill-1">verified</span>
+</div>
+<p class="text-[10px] text-text-secondary uppercase tracking-widest">Premium Vendor</p>
+</div>
+</div>
+<div class="bg-surface-highlight px-3 py-1 rounded-full border border-white/5">
+<span class="text-xs font-medium text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] fill-1">star</span> 4.9
+        </span>
+</div>
+</div>
+<div class="px-4 pb-6">
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-surface-dark p-3 rounded-xl border border-white/5">
+<p class="text-text-secondary text-[10px] font-medium uppercase mb-1">Inquiries</p>
+<p class="text-lg font-bold">128</p>
+<div class="text-[9px] text-green-400 mt-1">+14 new</div>
+</div>
+<div class="bg-surface-dark p-3 rounded-xl border border-white/5">
+<p class="text-text-secondary text-[10px] font-medium uppercase mb-1">Interest</p>
+<p class="text-lg font-bold">42</p>
+<div class="text-[9px] text-primary mt-1">8 active</div>
+</div>
+<div class="bg-surface-dark p-3 rounded-xl border border-white/5">
+<p class="text-text-secondary text-[10px] font-medium uppercase mb-1">Earnings</p>
+<p class="text-lg font-bold">₹8.4L</p>
+<div class="text-[9px] text-text-secondary mt-1">All time</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between px-4 pb-4">
+<h3 class="text-white text-lg font-bold tracking-tight">Leads for You</h3>
+<button class="text-xs text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">tune</span> Filter
+    </button>
+</div>
+<div class="flex flex-col gap-5 px-4">
+<div class="bg-surface-dark rounded-2xl border border-white/5 overflow-hidden flex flex-col">
+<div class="relative h-32 w-full bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCt9KCDCjVqvBLq-9d5QEAqR4KyGssaJzSyB0NEKUN1u6iupUvP4kPKMyhfhOsj-vFxYglXQ2U-034R6mOoQ3EZSuDjHN7bjekc0noS4OB4y8O8LtK7qeCpJrjapQinP86DbMTNbRMhmtonGgBMAMfhDJYAMEf9yvJT23JPLdeUd2SmOZy5Gu4Oo6EqTX9rH9ls_iHAogHL6RZwyROdlwdwaFaqlLveA0fJd6JcbTjSZUs1ZRon_-s35qYj8J55W2FLZ5HwW3UqzQ");'>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-black/60 backdrop-blur-md text-[10px] font-bold text-white px-2 py-1 rounded border border-white/10 uppercase">High Value</span>
+<span class="bg-primary text-background-dark text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">AI Matched</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3">
+<h4 class="text-lg font-bold text-white truncate">Luxury Corporate Gala</h4>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-3">
+<div class="grid grid-cols-2 gap-y-2 text-xs">
+<div class="flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>Oct 24, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>250 Guests</span>
+</div>
+<div class="flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Gurugram, HR</span>
+</div>
+<div class="flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span>₹15L - ₹20L</span>
+</div>
+</div>
+<p class="text-sm text-text-secondary leading-relaxed line-clamp-2">
+                Premium tech client looking for end-to-end event production, intelligent lighting, and customized thematic stage design for annual gala.
+            </p>
+<div class="pt-2 flex flex-col gap-2">
+<div class="bid-trigger relative">
+<button class="w-full bg-primary text-background-dark py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[20px]">send_money</span>
+                        Place Bid / Show Interest
+                    </button>
+<div class="bid-input mt-3 space-y-3">
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">₹</span>
+<input class="w-full bg-surface-highlight border-white/10 rounded-xl py-3 pl-8 text-white focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-neutral-600" placeholder="Enter Bid Amount" type="number"/>
+</div>
+<button class="w-full bg-white text-background-dark py-2 rounded-lg text-xs font-bold uppercase tracking-wider">Confirm My Bid</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-dark rounded-2xl border border-white/10 overflow-hidden flex flex-col">
+<div class="relative h-32 w-full bg-center bg-no-repeat bg-cover opacity-60" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDamXLw6SqgOgcftk59zQgec1IbLnyf4bQ6xHHn_nhwNmZVhoOVCayTeFrgE9j9lcP4PbOn71737z5k2RRQcaXPxSUEGuiUYL17PU9yrvB5kle05xBaCBfqQL0B20aJgdgONUtV2dBc6TGxsiGovX3Fr6Iv0oFFj7xEKvSeNRRjktp4xsk8PZgTVl9oqEKKvvFUIcFNylnhPbtvGzMVp1RicH6L505BdIqJ984ge3S7u57_ZfonoiipctLXu-C7TRXGoPJFYA7c_g");'>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent"></div>
+<div class="absolute top-3 right-3">
+<span class="bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2 py-1 rounded-full border border-blue-500/30 flex items-center gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                    Pending Admin Review
+                </span>
+</div>
+<div class="absolute bottom-3 left-3 right-3">
+<h4 class="text-lg font-bold text-white truncate">Floral Wedding Reception</h4>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-3">
+<div class="grid grid-cols-2 gap-y-2 text-xs">
+<div class="flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>Nov 12, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span>Bid: ₹4.5L</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-highlight rounded-xl mt-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">history</span>
+<span class="text-[11px] font-medium text-text-secondary">Interest shown 2 days ago</span>
+</div>
+<button class="text-[11px] font-bold text-white border-b border-white/20">Edit Bid</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-dark rounded-2xl border border-white/5 overflow-hidden flex flex-col">
+<div class="relative h-32 w-full bg-center bg-no-repeat bg-cover grayscale opacity-50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCt9KCDCjVqvBLq-9d5QEAqR4KyGssaJzSyB0NEKUN1u6iupUvP4kPKMyhfhOsj-vFxYglXQ2U-034R6mOoQ3EZSuDjHN7bjekc0noS4OB4y8O8LtK7qeCpJrjapQinP86DbMTNbRMhmtonGgBMAMfhDJYAMEf9yvJT23JPLdeUd2SmOZy5Gu4Oo6EqTX9rH9ls_iHAogHL6RZwyROdlwdwaFaqlLveA0fJd6JcbTjSZUs1ZRon_-s35qYj8J55W2FLZ5HwW3UqzQ");'>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent"></div>
+<div class="absolute top-3 right-3">
+<span class="bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded-full border border-green-500/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span>
+                    Assigned
+                </span>
+</div>
+<div class="absolute bottom-3 left-3 right-3">
+<h4 class="text-lg font-bold text-white truncate">Annual Tech Meet 2024</h4>
+</div>
+</div>
+<div class="p-4">
+<button class="w-full bg-surface-highlight border border-white/5 text-white py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+                Chat with Client
+            </button>
+</div>
+</div>
+</div>
+<div class="fixed bottom-0 left-0 w-full bg-background-dark/95 backdrop-blur-lg border-t border-white/5 pb-safe z-40">
+<div class="flex justify-between items-center h-20 px-6">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined filled">bolt</span>
+<span class="text-[10px] font-bold">Leads</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-medium">Bids</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="text-[10px] font-medium">Portfolio</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined text-green-500">account_balance_wallet</span>
+<span class="text-[10px] font-medium">Earnings</span>
+</button>
+</div>
+</div>
+
+</body></html>

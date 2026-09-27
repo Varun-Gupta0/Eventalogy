@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eventology Dual Onboarding</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FFC500", // Brand Yellow
+                        "background-dark": "#07070A", // Deep Black
+                    },
+                    fontFamily: {
+                        display: ["Outfit", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        .glass-dark {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .fade-bottom {
+            background: linear-gradient(to bottom, rgba(7, 7, 10, 0) 0%, rgba(7, 7, 10, 0.4) 40%, rgba(7, 7, 10, 1) 90%);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-white h-screen overflow-hidden selection:bg-primary selection:text-black">
+<div class="relative w-full h-full flex flex-col items-center justify-end">
+<div class="absolute inset-0 z-0">
+<img alt="High-end event imagery" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWkP_jqKEt4q91vPoALHampJeI3vao23ymDxiSY50GeY6CTam_FaiCYZkeQ87EJHS43d75BYENeEEmUZZZnMuyEnP9o8LOVKwS-ZW0PTrZ0ZFTJomA_WwBLi4Hs1_XcO_N2LDiidaOKAqCyahuLMV_uWGPltnaAM5j0yRk0ZbnOtxS37JJxKZN6G0hUgYR16x9KfhGpWeC9nJTK9HgNAava66vzcuNTyyrnbxGQtBqzCbiKmnYePUw_9455csCXaQQ20NCWx4kKQ"/>
+<div class="absolute inset-0 z-10 fade-bottom h-full w-full"></div>
+<div class="absolute inset-0 bg-black/40 z-0"></div>
+</div>
+<div class="relative z-20 w-full max-w-md px-6 pb-12 flex flex-col items-center">
+<div class="absolute top-[-45vh] flex flex-col items-center gap-4">
+<div class="w-20 h-20 bg-white/5 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl p-4">
+<img alt="Eventology Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL8fg3U-zvvTLEGIQuSGqYO7KIilXzGrIyF-SFhbzd3JRm5JOFU208vGN4v2U0dNoc-mHyEKIaaxoLWXwryrszBqp74AbxvgNFXTzYDMDtmFFWVjXKKQVtjfPzPeFyLAXIHirqnzoLe9fxjODQYoMr6PBYA6pMEMEZjcLqvI3Bb3jhreMgfU11Zvg5YXX_ncXgZNV0BAey7MualmFgjmwc8ZxxN37wbTWP1cItpQNObbVvEmSq-I70r2gM3uTJyuztKJGFd9F2_A"/>
+</div>
+<h1 class="text-2xl font-bold tracking-[0.3em] uppercase text-white drop-shadow-lg">Eventology</h1>
+</div>
+<div class="w-full mb-10">
+<div class="bg-white/10 backdrop-blur-md p-1 rounded-2xl border border-white/10 flex relative">
+<div class="absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] bg-primary rounded-xl transition-all duration-300 shadow-lg"></div>
+<button class="relative z-10 flex-1 h-11 text-sm font-bold text-black flex items-center justify-center transition-colors">
+                        Customer
+                    </button>
+<button class="relative z-10 flex-1 h-11 text-sm font-semibold text-white/70 flex items-center justify-center hover:text-white transition-colors">
+                        Vendor
+                    </button>
+</div>
+</div>
+<div class="w-full mb-8 text-center">
+<h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4 text-white">
+                    Beautiful places to <br/>
+<span class="text-primary">Book around you.</span>
+</h2>
+<p class="text-gray-400 text-lg font-medium leading-snug max-w-xs mx-auto">
+                    Choose your dream destination, arena and much more for your event.
+                </p>
+</div>
+<div class="w-full space-y-3">
+<button class="w-full h-14 bg-primary hover:bg-[#e6b200] text-black font-bold text-lg rounded-2xl transition-all transform active:scale-[0.98] shadow-[0_8px_30px_rgb(255,197,0,0.3)] flex items-center justify-center">
+                    Sign up free
+                </button>
+<button class="w-full h-14 glass-dark hover:bg-white/15 text-white font-semibold text-lg rounded-2xl transition-all flex items-center justify-center gap-3">
+<img alt="Google" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoB9bzvpLGDHTKkT9FvkiOX1yzr1JYgLP8VtwymnVB3YYULmMN1svg6zwIrD-fkozgGWsANO941ivsNiw0NTATpWOv3IoOBK2csX4551HNP5GpfbndwndxWbE3_DlNQM_X6PKEN6HDJGP4cHZpfh1CNzJEMHLAxPds8QIZbVV7GU_DZ3xLR64ZWD-khWErEyUQNaFYe9OcfL2WsR3EVqZvqFdYgkifauskVbrF641G4tPM4yDYEuY8v7GsxYb28UeJAjFGIDfLHg"/>
+<span>Continue with Google</span>
+</button>
+<button class="w-full h-14 glass-dark hover:bg-white/15 text-white font-semibold text-lg rounded-2xl transition-all flex items-center justify-center gap-3">
+<svg class="w-6 h-6 fill-current text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.05 20.28C15.895 21.96 14.535 23.955 12.635 23.955C10.79 23.955 10.22 22.855 8.1 22.855C5.97 22.855 5.335 23.905 3.595 23.955C1.82 24.005 0.395 21.935 -0.635 18.89C-1.68 15.805 -0.875 9.99 3.545 9.775C5.55 9.675 7.02 11.095 8.27 11.095C9.52 11.095 11.455 9.395 13.9 9.395C14.935 9.42 17.205 9.795 18.905 12.285C18.8 12.35 16.895 13.46 16.925 16.145C16.96 18.895 19.345 19.95 19.435 20.005C19.38 20.155 19.015 21.43 18.23 22.57L17.05 20.28ZM12.985 6.645C13.885 5.545 14.49 4.025 14.32 2.5C13.045 2.55 11.505 3.35 10.59 4.415C9.775 5.35 9.045 6.94 9.245 8.42C10.665 8.53 12.16 7.665 12.985 6.645Z"></path>
+</svg>
+<span>Continue with Apple</span>
+</button>
+</div>
+<div class="mt-10">
+<a class="text-gray-400 hover:text-white font-semibold text-base transition-colors duration-200" href="#">
+                    Log in
+                </a>
+</div>
+</div>
+</div>
+
+</body></html>

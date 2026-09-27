@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FFC500",      // Vibrant Yellow/Gold
+                        "primary-dim": "#D9A800",
+                        "background-base": "#07070A", // Deep Black
+                        "background-card": "#131318",
+                        "surface-highlight": "#1C1C24",
+                        "text-main": "#FFFFFF",
+                        "text-muted": "#A1A1AA",
+                    },
+                    fontFamily: {
+                        "sans": ["Plus Jakarta Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    boxShadow: {
+                        "glow-gold": "0 0 20px rgba(255, 197, 0, 0.2)",
+                        "inner-gold": "inset 0 0 10px rgba(255, 197, 0, 0.1)",
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .glass-morphism {
+                background: rgba(19, 19, 24, 0.7);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 197, 0, 0.15);
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-base font-sans text-text-main antialiased selection:bg-primary selection:text-black">
+<div class="relative flex min-h-screen w-full flex-col max-w-[480px] mx-auto shadow-2xl bg-background-base border-x border-white/5 overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center bg-background-base/90 backdrop-blur-lg px-4 py-4 justify-between border-b border-primary/10">
+<button class="active:scale-95 transition-transform text-primary">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="text-primary text-[10px] font-bold uppercase tracking-[0.2em] leading-none mb-1">Eventology India</h1>
+<h2 class="text-white text-lg font-serif font-bold leading-tight">Royal Architect</h2>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full border border-primary/20 bg-surface-highlight overflow-hidden">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</header>
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="Majestic Wedding Setup" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoFlJDcMSKGCcACjHOOFgjc_ymJbG599u0CHcWWpCGIavg06DZ3ciS0nPrNUroFDakgfDZ-TSlOAgTtoQPOkXBdHDqHiv2fBWdBFWtBaaj-4RyJ_PKpIqFANzUfAZtXWhTvY7s8c2oBBxqLfgbWl7z4e4nd_57CpnUJ6JTMjvG62Yzm98_IWUIgnD5eFZOZl1cb-VTv-EL6TazJAiLz-wA4Ohd-5a1QX5dThpLaKhat8744IbtzpHj3FtoUbtsy-KeYPWSd7ardw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-base via-background-base/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6 space-y-2">
+<span class="inline-block px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary text-[10px] font-bold uppercase tracking-widest">Est. 2024</span>
+<h2 class="text-4xl md:text-5xl font-serif font-medium text-white leading-[1.1]">
+                    The Art of <br/>
+<span class="text-primary italic font-semibold">Royalty</span>
+</h2>
+<p class="text-text-muted text-sm max-w-[280px] leading-relaxed">Crafting legendary wedding experiences for India's elite.</p>
+</div>
+</div>
+<div class="px-4 -mt-10 relative z-10">
+<div class="glass-morphism rounded-2xl p-6 shadow-glow-gold overflow-hidden relative group">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-all duration-700"></div>
+<div class="flex items-start justify-between mb-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">auto_awesome</span>
+<h3 class="text-white text-xl font-serif font-bold tracking-wide">AI Wedding Architect</h3>
+</div>
+<p class="text-text-muted text-xs leading-relaxed">Precision-engineered planning powered by luxury intelligence.</p>
+</div>
+</div>
+<button class="w-full py-4 bg-primary hover:bg-white text-black font-bold uppercase tracking-widest text-xs rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group-active:scale-[0.98]">
+                    Launch Intelligent Planner
+                    <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<section class="mt-10">
+<div class="flex items-center justify-between px-6 mb-6">
+<h3 class="text-white text-2xl font-serif font-bold tracking-tight">Exquisite Packages</h3>
+<button class="text-primary text-xs font-bold uppercase tracking-widest border-b border-primary/30 pb-0.5">View All</button>
+</div>
+<div class="flex overflow-x-auto hide-scrollbar gap-5 px-6 pb-6">
+<div class="flex-none w-[280px] group">
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-primary/20 mb-4">
+<img alt="Ethereal Garden" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn836WkEmBWtXKEkwSMb_bFX1M2gsBSQSzIxNisZs2HD6UeCZdhhdE3crCUXGz2p8hbDhIwO7XbznfWwoqCJsuqaja2tSE_94xQ3D0zbUV_Ge3DNzwv515g4i7h2WVl1iEFD9Z6tVyd8hV8Rfr0esejLIlGqu_iFSXgTMwp9-P-mtMTgKRJmJ_R3nMD6EWgTMZcVAKHt3dKdCgiIIHGKT0HV8t-K0QEBJC8sQ-BPvpxZ7s7Rc4JFcThOwxVRDgTpRnH04xruUrMg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-base via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-primary/40 text-[10px] font-bold text-primary uppercase">Elite Choice</span>
+</div>
+</div>
+<div class="px-1 flex justify-between items-start">
+<div>
+<h4 class="text-white text-xl font-serif font-semibold">Ethereal Garden</h4>
+<p class="text-text-muted text-xs mt-1">Majestic outdoor floral arrangements</p>
+</div>
+<p class="text-primary font-bold text-lg">₹12L+</p>
+</div>
+</div>
+<div class="flex-none w-[280px] group">
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-primary/20 mb-4">
+<img alt="Urban Chic" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ-8KgicX32WUmH6WxVpNBEKAMthm3VCTkHCcbW6w_7WKBvoiYimSY2RslzZQtnrziFkDozOAHfnJYOeHlBx15wH1_RWaPSVH7u7dGuSCpxR2fDhsaonusnVrHmF2ViJJeHkttgqLRfIzDl9wQk7NQxvXHL7NM-DDc0GocPYB34S7wBCuwB2wp-9o1Hu-SzBshVpQ2o1nNPjWI82QrnV-ziJE6WZCysZq9iaMHrJUIVkNkXwQY0RATWJMrXf9PNCT5n43tEt7_aQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-base via-transparent to-transparent"></div>
+</div>
+<div class="px-1 flex justify-between items-start">
+<div>
+<h4 class="text-white text-xl font-serif font-semibold">Imperial Manor</h4>
+<p class="text-text-muted text-xs mt-1">Regal indoor heritage ceremonies</p>
+</div>
+<p class="text-primary font-bold text-lg">₹25L+</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-4 px-6 mb-32">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-white text-2xl font-serif font-bold tracking-tight">Elite Vendors</h3>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-background-card rounded-2xl p-3 border border-white/5 hover:border-primary/30 transition-colors">
+<div class="relative aspect-square rounded-xl overflow-hidden mb-3">
+<img alt="Florist" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzAGrA0tpG1WkrcUy0vGchL8EMWRbOKt0XiuwB-oSuPQpbEgZ8fKrrBX6WftPZfGMAEFgsJ-NgsOX3xzvrrRu3btx3pLhvq-d6MkNVr_U0WdXmFDlThkB5gLDNaFHbzKnHS3Hsl63w_gms7bjILdPAk1_RQYYsdT_-mBf4snLUn2KFyc5VgyCsyYMDtArYPuOQRpmN3KJ7F07zDvCcr_-rn0hvpyXXaooZopwLV3lQUK4CIgXkISfnsb6rb0q_-s_hrjz2P5CUUA"/>
+<button class="absolute top-2 right-2 size-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-primary border border-white/10">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+</button>
+</div>
+<h5 class="text-white font-serif font-semibold text-sm truncate">Bloom &amp; Stem</h5>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-[14px] fill-1">star</span>
+<p class="text-[10px] text-text-muted font-bold uppercase tracking-wider">4.9 · 120 Reviews</p>
+</div>
+</div>
+<div class="bg-background-card rounded-2xl p-3 border border-white/5 hover:border-primary/30 transition-colors">
+<div class="relative aspect-square rounded-xl overflow-hidden mb-3">
+<img alt="Venue" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8kLJM6Nj95_HSyDoRrtKgpIKiacrDyA3avQdmjhyDl_VoPwfQ2Sa2aTlWomo1AECJlA6ZPMDxFe3yguu8tS9ahKgKAotOW2ok3Ch-DKtyvGjwWGcLdcY3hgX-35eZCyHsqRom006WQiesmUG7-NgccbXPsnVkVCAYWolzysX0Kfn-Anq3yklrWgUXtyKgVUviqJMA3nbhp_bfNvDvoZPLXxnqwxT9cy0CQUyT6HPBxjrWn9mpyg2FnvR6LLVg4fv8whRcUmwfMw"/>
+<button class="absolute top-2 right-2 size-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white/50 border border-white/10">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<h5 class="text-white font-serif font-semibold text-sm truncate">The Grand Heritage</h5>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-[14px] fill-1">star</span>
+<p class="text-[10px] text-text-muted font-bold uppercase tracking-wider">5.0 · 84 Reviews</p>
+</div>
+</div>
+<div class="bg-background-card rounded-2xl p-3 border border-white/5 hover:border-primary/30 transition-colors">
+<div class="relative aspect-square rounded-xl overflow-hidden mb-3">
+<img alt="Photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZkRAQYIlIas4RvPPoI9UxBk7fGF2rKXnBAbeiFGxKR1d4qvKMSjA44lTOt3qucqdDJHLB27LYCh4ke9cGB1vJIRjEFupPvyVlj6HipkU8M54F3xBhlilb-KHR2dVlNBsxX-b6F67NYtUsY7TA0xnC2AtseOIlQCGpgdE_-hHD5qCcafcIaKVJ5L2SOGkT9BqSFq6JFgZrAbWqassU2PGqkLB_kOAzxLXDG6WFOc1OjFRhov-N7gZVDn9fnY1D4Ka_1XVIVXM8HA"/>
+</div>
+<h5 class="text-white font-serif font-semibold text-sm truncate">Vow Visuals</h5>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-[14px] fill-1">star</span>
+<p class="text-[10px] text-text-muted font-bold uppercase tracking-wider">4.8 · 210 Reviews</p>
+</div>
+</div>
+<div class="bg-background-card rounded-2xl p-3 border border-white/5 hover:border-primary/30 transition-colors">
+<div class="relative aspect-square rounded-xl overflow-hidden mb-3">
+<img alt="Cakes" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNy-DH5LXUxe8yKIJo3qKyWpP_DiorOQqqbzsbjmcZdPyTKR_CYhoWOUgp4Rolx9hU6PjpwuKa9YwU0tMoewbtyZhKrztoU0z6qrajcqd65Qy1hU6EpMfLQtpEINyyth_g8inhDUOK1A-7PyQBCl-RIXFxwvqvPxwqXYu9McH_tNNB8ztGzNBYUKlLlymiuUUez2I8gx5dFdC4TIg1H9bxtW8iDlx7sJCklvgLO4iEZ9LMU0g2eoPQ3jcpErKVoTnBF7HNBmUUxw"/>
+</div>
+<h5 class="text-white font-serif font-semibold text-sm truncate">Velvet Sugar</h5>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-[14px] fill-1">star</span>
+<p class="text-[10px] text-text-muted font-bold uppercase tracking-wider">4.7 · 95 Reviews</p>
+</div>
+</div>
+</div>
+</section>
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[400px] h-16 glass-morphism rounded-full shadow-2xl flex items-center justify-around px-2 z-[100]">
+<button class="text-primary flex flex-col items-center">
+<span class="material-symbols-outlined text-2xl fill-1">home</span>
+</button>
+<button class="text-text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">calendar_month</span>
+</button>
+<button class="bg-primary text-black size-12 rounded-full flex items-center justify-center -translate-y-5 shadow-[0_0_20px_rgba(255,197,0,0.5)] border-4 border-background-base active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+<button class="text-text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">auto_awesome</span>
+</button>
+<button class="text-text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">chat_bubble</span>
+</button>
+</div>
+</div>
+
+</body></html>
