@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "605358096794",
+    "project_id": "eventalogy-p1",
+    "storage_bucket": "eventalogy-p1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605358096794:android:2ab2ebff2f30920db17a23",
+        "android_client_info": {
+          "package_name": "com.eventology_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYW_IA2z9kx_bjZY-4VZ_H5dyD0SGUsQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

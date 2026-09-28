@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/widgets/primary_button.dart';
 import '../../core/widgets/custom_text_field.dart';
 import '../../core/theme/app_colors.dart';
-import '../../services/auth_service.dart';
+import '../../services/firebase_auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,19 +18,64 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
 
   void _handleLogin() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter email and password')),
+      );
+      return;
+    }
+
     setState(() => _isLoading = true);
     
-    // Simulate login and role resolution
-    final role = await AuthService.login(
-      _emailController.text, 
-      _passwordController.text,
-    );
-    
-    if (mounted) {
-      if (role == 'admin') {
-        context.go('/admin');
-      } else {
-        context.go('/home');
+    try {
+      await FirebaseAuthService.login(
+        _emailController.text.trim(), 
+        _passwordController.text,
+      );
+      // Navigation is now handled by GoRouter redirect
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception: ', '')),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  void _handlePasswordReset() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter your email to reset password')),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuthService.resetPassword(email);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Password reset email sent! Check your inbox.'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception: ', '')),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
   }
@@ -94,14 +139,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     isLoading: _isLoading,
                   ),
                   const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: () {
-                      // Navigate to signup
-                    },
-                    child: Text(
-                      'Don\'t have an account? Sign Up',
-                      style: TextStyle(color: AppColors.primary),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: _handlePasswordReset,
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: AppColors.textSecondary),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.go('/signup');
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(color: AppColors.primary),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

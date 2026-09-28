@@ -13,11 +13,17 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     await FirestoreService.seedInitialData();
+    runApp(const EventologyApp());
   } catch (e) {
-    debugPrint('Firebase initialization note: $e');
+    debugPrint('Firebase initialization failed: $e');
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('Failed to initialize application.\nPlease restart.', textAlign: TextAlign.center),
+        ),
+      ),
+    ));
   }
-
-  runApp(const EventologyApp());
 }
 
 class EventologyApp extends StatelessWidget {

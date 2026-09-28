@@ -19,28 +19,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDemoWebApiKeyForEventologyProj',
-    appId: '1:100000000000:web:demo1234567890',
-    messagingSenderId: '100000000000',
-    projectId: 'eventology-app-demo',
-    authDomain: 'eventology-app-demo.firebaseapp.com',
-    storageBucket: 'eventology-app-demo.appspot.com',
+    apiKey: 'AIzaSyDYW_IA2z9kx_bjZY-4VZ_H5dyD0SGUsQ0',
+    appId: '1:605358096794:web:2ab2ebff2f30920db17a23',
+    messagingSenderId: '605358096794',
+    projectId: 'eventalogy-p1',
+    authDomain: 'eventalogy-p1.firebaseapp.com',
+    storageBucket: 'eventalogy-p1.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDemoAndroidApiKeyForEventology',
-    appId: '1:100000000000:android:demo1234567890',
-    messagingSenderId: '100000000000',
-    projectId: 'eventology-app-demo',
-    storageBucket: 'eventology-app-demo.appspot.com',
+    apiKey: 'AIzaSyDYW_IA2z9kx_bjZY-4VZ_H5dyD0SGUsQ0',
+    appId: '1:605358096794:android:2ab2ebff2f30920db17a23',
+    messagingSenderId: '605358096794',
+    projectId: 'eventalogy-p1',
+    storageBucket: 'eventalogy-p1.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDemoIOSApiKeyForEventologyProj',
-    appId: '1:100000000000:ios:demo1234567890',
-    messagingSenderId: '100000000000',
-    projectId: 'eventology-app-demo',
-    storageBucket: 'eventology-app-demo.appspot.com',
-    iosBundleId: 'in.eventology.app',
+    apiKey: 'AIzaSyDYW_IA2z9kx_bjZY-4VZ_H5dyD0SGUsQ0',
+    appId: '1:605358096794:ios:2ab2ebff2f30920db17a23',
+    messagingSenderId: '605358096794',
+    projectId: 'eventalogy-p1',
+    storageBucket: 'eventalogy-p1.firebasestorage.app',
+    iosBundleId: 'com.eventology_app',
   );
 }
