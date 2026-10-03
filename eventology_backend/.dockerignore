@@ -1,5 +1,14 @@
 node_modules
 dist
 .env
+.env.*
 .git
 *.log
+*.json.bak
+serviceAccountKey.json
+service-account*.json
+firebase-service-account*.json
+credential*.json
+.idea
+.vscode
+coverage

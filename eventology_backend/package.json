@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "dev": "ts-node src/index.ts",
     "start": "node dist/index.js",
+    "test": "jest",
     "set-role": "ts-node src/scripts/setRole.ts"
   },
   "keywords": [],
