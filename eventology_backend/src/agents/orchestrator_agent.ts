@@ -91,10 +91,8 @@ export async function orchestratorAgentNode(state: StateType): Promise<Partial<S
 
   const stateUpdates: Partial<StateType> = {};
 
-  // If there's a new user message, append it to history and resume active status
+  // If there's a new user message, resume active status (it was already appended to history by the router)
   if (state.userMessage) {
-    stateUpdates.conversationHistory = [new HumanMessage(state.userMessage)];
-    
     // --- CONVERSATIONAL REASSESSMENT ---
     if (state.intakeComplete) {
       await logAgentAction(state.workflowId, "orchestrator_agent", "reassessment_start", "running");
@@ -125,8 +123,7 @@ Rules:
 
       const messages = [
         new SystemMessage(systemPrompt),
-        ...state.conversationHistory, // Include history up to this point
-        new HumanMessage(state.userMessage)
+        ...state.conversationHistory, // Include history up to this point (already includes the new user message)
       ];
 
       try {
