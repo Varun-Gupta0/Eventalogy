@@ -17,6 +17,12 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Temporary Request Logging to diagnose Flutter connection
+app.use((req, res, next) => {
+  console.log(`[INCOMING] ${req.method} ${req.url}`);
+  next();
+});
+
 // Capture raw body for WhatsApp HMAC-SHA256 signature validation.
 // Must be registered BEFORE express.json() parses the body.
 app.use((req, res, next) => {
