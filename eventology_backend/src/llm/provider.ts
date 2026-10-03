@@ -14,35 +14,34 @@ export interface LLMProviderOptions {
 export function getLLMProvider(options?: LLMProviderOptions) {
   const temperature = options?.temperature ?? 0.0;
   
-  const geminiApiKey = (process.env.GEMINI_API_KEY || "").trim();
-
-  // If Gemini API key is available, use Gemini as the primary provider
-  if (geminiApiKey) {
-    const modelName = options?.modelName || process.env.GEMINI_MODEL || "gemini-3.8-flash";
-    return new ChatGoogleGenerativeAI({
-      model: modelName,
+  const openRouterApiKey = (process.env.OPENROUTER_API_KEY || "").trim();
+  
+  // If OpenRouter API key is available, use it as the primary provider
+  if (openRouterApiKey) {
+    const modelName = options?.modelName || process.env.OPENROUTER_MODEL || "meta-llama/llama-3.1-8b-instruct:free";
+    return new ChatOpenAI({
+      modelName: modelName,
       temperature,
-      apiKey: geminiApiKey,
-      maxRetries: 0,
+      apiKey: openRouterApiKey,
       callbacks: options?.callbacks,
+      configuration: {
+        baseURL: "https://openrouter.ai/api/v1",
+        defaultHeaders: {
+          "HTTP-Referer": process.env.EVENTOLOGY_WEB_URL || "http://localhost:3000",
+          "X-Title": "Eventology AI Agent Runtime"
+        }
+      }
     });
   }
 
-  // Fallback to OpenRouter if Gemini is not configured
-  const modelName = options?.modelName || process.env.OPENROUTER_MODEL || "meta-llama/llama-3.1-8b-instruct:free";
-  const openRouterApiKey = (process.env.OPENROUTER_API_KEY || "").trim();
-  
-  return new ChatOpenAI({
-    modelName: modelName,
+  // Fallback to Gemini if OpenRouter is not configured
+  const geminiApiKey = (process.env.GEMINI_API_KEY || "").trim();
+  const geminiModelName = options?.modelName || process.env.GEMINI_MODEL || "gemini-3.8-flash";
+  return new ChatGoogleGenerativeAI({
+    model: geminiModelName,
     temperature,
-    apiKey: openRouterApiKey,
+    apiKey: geminiApiKey,
+    maxRetries: 0,
     callbacks: options?.callbacks,
-    configuration: {
-      baseURL: "https://openrouter.ai/api/v1",
-      defaultHeaders: {
-        "HTTP-Referer": process.env.EVENTOLOGY_WEB_URL || "http://localhost:3000",
-        "X-Title": "Eventology AI Agent Runtime"
-      }
-    }
   });
 }
