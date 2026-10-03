@@ -23,18 +23,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Capture raw body for WhatsApp HMAC-SHA256 signature validation.
-// Must be registered BEFORE express.json() parses the body.
-app.use((req, res, next) => {
-  let data = "";
-  req.on("data", (chunk) => { data += chunk; });
-  req.on("end", () => {
-    (req as any).rawBody = data;
-    next();
-  });
-});
-
-app.use(express.json());
+// Automatically parse JSON and capture the raw body for WhatsApp HMAC-SHA256 signature validation.
+app.use(express.json({
+  verify: (req, res, buf) => {
+    (req as any).rawBody = buf.toString();
+  }
+}));
 
 app.use("/api/agent", agentRouter);
 app.use("/api/admin", adminRoutes);
