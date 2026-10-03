@@ -29,7 +29,10 @@ class AuthStateNotifier extends ChangeNotifier {
           // Force refresh false first to avoid unnecessary network calls
           // The token will automatically refresh when custom claims are updated on the backend
           // if the user signs out/in, or after 1 hour.
-          final idTokenResult = await user.getIdTokenResult();
+          final idTokenResult = await user.getIdTokenResult().timeout(
+            const Duration(seconds: 5),
+            onTimeout: () => throw Exception('Firebase ID Token fetch timed out'),
+          );
           
           // The source of truth is the custom claim 'role' set by the Firebase Admin SDK
           final claimRole = idTokenResult.claims?['role'] as String?;
