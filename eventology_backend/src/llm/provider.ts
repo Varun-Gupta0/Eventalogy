@@ -18,7 +18,7 @@ export function getLLMProvider(options?: LLMProviderOptions) {
   
   // If OpenRouter API key is available, use it as the primary provider
   if (openRouterApiKey) {
-    const modelName = options?.modelName || process.env.OPENROUTER_MODEL || "meta-llama/llama-3.1-8b-instruct:free";
+    const modelName = options?.modelName || process.env.OPENROUTER_MODEL || "openai/gpt-4o-mini";
     return new ChatOpenAI({
       modelName: modelName,
       temperature,
