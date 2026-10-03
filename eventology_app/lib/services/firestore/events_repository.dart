@@ -40,4 +40,13 @@ class EventsRepository {
   static Future<void> delete(String id) async {
     await _col.doc(id).delete();
   }
+
+  static Future<EventModel?> getEvent(String id) => get(id);
+
+  static Stream<List<EventModel>> streamUserEvents(String userId) {
+    return _col
+        .where('userId', isEqualTo: userId)
+        .snapshots()
+        .map((s) => s.docs.map((d) => EventModel.fromFirestore(d)).toList());
+  }
 }

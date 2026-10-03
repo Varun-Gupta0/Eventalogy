@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../core/firebase/firestore_config.dart';
 import '../../core/database/collections.dart';
 import 'package:intl/intl.dart';
+import '../../services/admin_api_service.dart';
 
 class AdminEventsTab extends StatefulWidget {
   const AdminEventsTab({super.key});
@@ -116,8 +117,17 @@ class _AdminEventsTabState extends State<AdminEventsTab> {
               onPressed: () => _showDialog(item),
             ),
             IconButton(
-              icon: const Icon(Icons.delete, color: Colors.redAccent),
-              onPressed: () => EventsRepository.delete(item.eventId),
+              icon: const Icon(Icons.cancel, color: Colors.redAccent),
+              tooltip: 'Cancel Event',
+              onPressed: () async {
+                try {
+                  await AdminApiService.cancelEvent(item.eventId);
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                  }
+                }
+              },
             ),
           ],
         ),

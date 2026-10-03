@@ -37,6 +37,22 @@ class AllocationsRepository {
     await _col.doc(item.allocationId).update(updates);
   }
 
+  static Stream<List<AllocationModel>> streamVendorAllocations(String vendorId) {
+    return _col
+        .where('vendorId', isEqualTo: vendorId)
+        .orderBy('startTime', descending: false)
+        .snapshots()
+        .map((s) => s.docs.map((d) => AllocationModel.fromFirestore(d)).toList());
+  }
+
+  static Stream<List<AllocationModel>> streamEventAllocations(String eventId) {
+    return _col
+        .where('eventId', isEqualTo: eventId)
+        .orderBy('startTime', descending: false)
+        .snapshots()
+        .map((s) => s.docs.map((d) => AllocationModel.fromFirestore(d)).toList());
+  }
+
   static Future<void> delete(String id) async {
     await _col.doc(id).delete();
   }

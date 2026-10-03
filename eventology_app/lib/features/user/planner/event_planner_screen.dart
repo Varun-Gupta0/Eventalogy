@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../data/mock/planner_mock_data.dart';
-import '../../../services/mock_cart_service.dart';
+import '../../../services/firestore/catalog_repository.dart';
+import '../../../services/firestore/package_repository.dart';
+import '../../../models/event_type_model.dart';
+import '../../../models/package_model.dart';
 import '../../../core/theme/app_colors.dart';
 
 class EventPlannerScreen extends StatelessWidget {
@@ -10,15 +12,13 @@ class EventPlannerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eventType = PlannerMockData.eventTypes.firstWhere((e) => e.id == eventTypeId);
-    final packages = PlannerMockData.packages.where((p) => p.eventTypeId == eventTypeId).toList();
     
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(
-          '${eventType.name.toUpperCase()} PACKAGES',
-          style: const TextStyle(
+        title: const Text(
+          'PACKAGES',
+          style: TextStyle(
             fontSize: 12,
             color: AppColors.primary,
             letterSpacing: 2.0,
@@ -41,11 +41,31 @@ class EventPlannerScreen extends StatelessWidget {
               ),
             ),
           ),
-          ListView.builder(
-            padding: const EdgeInsets.fromLTRB(16, 120, 16, 120),
-            itemCount: packages.length,
-            itemBuilder: (context, index) {
-              final package = packages[index];
+          FutureBuilder<EventTypeModel?>(
+            future: CatalogRepository.getEventType(eventTypeId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              final eventType = snapshot.data;
+              if (eventType == null) {
+                return const Center(child: Text('Event type not found', style: TextStyle(color: Colors.white)));
+              }
+              return StreamBuilder<List<PackageModel>>(
+                stream: PackageRepository.streamActivePackages(),
+                builder: (context, packageSnapshot) {
+                  if (packageSnapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  final packages = packageSnapshot.data ?? [];
+                  if (packages.isEmpty) {
+                    return const Center(child: Text('No packages available yet', style: TextStyle(color: AppColors.textSecondary)));
+                  }
+                  return ListView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 120, 16, 120),
+                    itemCount: packages.length,
+                    itemBuilder: (context, index) {
+                      final package = packages[index];
               return Container(
                 margin: const EdgeInsets.only(bottom: 24),
                 decoration: BoxDecoration(
@@ -86,7 +106,7 @@ class EventPlannerScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        package.description,
+                        package.description ?? 'No description provided.',
                         style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
                       ),
                       const SizedBox(height: 24),
@@ -99,10 +119,9 @@ class EventPlannerScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              MockCartService().addItem(package.name);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('${package.name} added to shortlist', style: const TextStyle(color: Colors.black)),
+                                  content: Text('${package.name} enquiry started', style: const TextStyle(color: Colors.black)),
                                   backgroundColor: AppColors.primary,
                                   behavior: SnackBarBehavior.floating,
                                 ),
@@ -125,8 +144,12 @@ class EventPlannerScreen extends StatelessWidget {
                 ),
               );
             },
-          ),
-        ],
+          );
+        },
+      );
+    },
+  ),
+],
       ),
     );
   }

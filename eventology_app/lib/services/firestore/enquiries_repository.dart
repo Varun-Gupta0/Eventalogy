@@ -37,6 +37,50 @@ class EnquiriesRepository {
     await _col.doc(item.enquiryId).update(updates);
   }
 
+  static Stream<List<EnquiryModel>> streamVendorEnquiries(String vendorId) {
+    return _col
+        .where('vendorId', isEqualTo: vendorId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((s) => s.docs.map((d) => EnquiryModel.fromFirestore(d)).toList());
+  }
+
+  static Future<void> acceptEnquiry(String id) async {
+    return _db.runTransaction((transaction) async {
+      final docRef = _col.doc(id);
+      final snapshot = await transaction.get(docRef);
+      if (!snapshot.exists) throw Exception("Enquiry not found");
+      
+      final data = snapshot.data()!;
+      if (data['status'] != 'pending') {
+        throw Exception("Only pending enquiries can be accepted");
+      }
+      
+      transaction.update(docRef, {
+        'status': 'accepted',
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    });
+  }
+
+  static Future<void> declineEnquiry(String id) async {
+    return _db.runTransaction((transaction) async {
+      final docRef = _col.doc(id);
+      final snapshot = await transaction.get(docRef);
+      if (!snapshot.exists) throw Exception("Enquiry not found");
+      
+      final data = snapshot.data()!;
+      if (data['status'] != 'pending') {
+        throw Exception("Only pending enquiries can be declined");
+      }
+      
+      transaction.update(docRef, {
+        'status': 'declined',
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    });
+  }
+
   static Future<void> delete(String id) async {
     await _col.doc(id).delete();
   }

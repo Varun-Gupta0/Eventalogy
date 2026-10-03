@@ -13,25 +13,26 @@ export const searchVendorsByServiceTool = tool(
         .where("active", "==", true)
         .limit(1).get();
 
-      let query: FirebaseFirestore.Query = db.collection("vendors").where("active", "==", true);
+      let query: FirebaseFirestore.Query = db.collection("vendors").where("status", "==", "active");
       if (!catSnap.empty) {
-        query = query.where("categoryId", "==", catSnap.docs[0].id);
+        query = query.where("categoryIds", "array-contains", catSnap.docs[0].id);
       }
-      if (city) query = query.where("city", "==", city);
+      // locationId would be used instead of city
+      // if (city) query = query.where("city", "==", city);
 
       const snapshot = await query.limit(15).get();
       const vendors = snapshot.docs.map(doc => {
         const d = doc.data();
         return {
           vendorId: doc.id,
-          name: d.name,
+          name: d.businessName,
           serviceCategory,
-          categoryId: d.categoryId,
-          city: d.city,
+          categoryIds: d.categoryIds,
+          locationId: d.locationId,
           rating: d.rating,
-          priceRange: d.priceRange,
+          pricingModel: d.pricingModel,
           description: d.description,
-          portfolio: d.portfolio ?? [],
+          portfolioImages: d.portfolioImages ?? [],
         };
       });
 

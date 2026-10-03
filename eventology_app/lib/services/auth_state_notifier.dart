@@ -11,6 +11,7 @@ class AuthStateNotifier extends ChangeNotifier {
   bool _isLoading = true;
 
   User? get user => _user;
+  String? get userId => _user?.uid;
   String get role => _role;
   bool get isLoading => _isLoading;
   bool get isAuthenticated => _user != null;

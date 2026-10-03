@@ -7,9 +7,10 @@ import { db } from "../config/firebase";
 export const searchVenuesTool = tool(
   async ({ city, minCapacity, maxCapacity, venueType }) => {
     try {
-      let query: FirebaseFirestore.Query = db.collection("venues").where("active", "==", true);
-      if (city) query = query.where("city", "==", city);
-      if (venueType) query = query.where("type", "==", venueType);
+      let query: FirebaseFirestore.Query = db.collection("venues").where("status", "==", "active").where("verified", "==", true);
+      // locationId would be used instead of city, but for now we skip filtering by city directly in DB if we don't have locationId
+      // if (city) query = query.where("city", "==", city);
+      if (venueType) query = query.where("venueTypeId", "==", venueType);
 
       const snapshot = await query.limit(20).get();
       const venues = snapshot.docs
@@ -18,10 +19,10 @@ export const searchVenuesTool = tool(
           return {
             venueId: doc.id,
             name: d.name,
-            city: d.city,
+            locationId: d.locationId,
             capacity: d.capacity,
-            venueType: d.type,
-            basePrice: d.basePrice,
+            venueType: d.venueTypeId,
+            basePrice: d.priceFrom,
             amenities: d.amenities || [],
             description: d.description,
           };

@@ -37,6 +37,58 @@ class BookingsRepository {
     await _col.doc(item.bookingId).update(updates);
   }
 
+  static Stream<List<BookingModel>> streamVendorBookings(String vendorId) {
+    return _col
+        .where('vendorId', isEqualTo: vendorId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((s) => s.docs.map((d) => BookingModel.fromFirestore(d)).toList());
+  }
+
+  static Stream<List<BookingModel>> streamEventBookings(String eventId) {
+    return _col
+        .where('eventId', isEqualTo: eventId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((s) => s.docs.map((d) => BookingModel.fromFirestore(d)).toList());
+  }
+
+  static Future<void> confirmBooking(String id) async {
+    return _db.runTransaction((transaction) async {
+      final docRef = _col.doc(id);
+      final snapshot = await transaction.get(docRef);
+      if (!snapshot.exists) throw Exception("Booking not found");
+      
+      final data = snapshot.data()!;
+      if (data['status'] != 'pending') {
+        throw Exception("Only pending bookings can be confirmed");
+      }
+      
+      transaction.update(docRef, {
+        'status': 'confirmed',
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    });
+  }
+
+  static Future<void> rejectBooking(String id) async {
+    return _db.runTransaction((transaction) async {
+      final docRef = _col.doc(id);
+      final snapshot = await transaction.get(docRef);
+      if (!snapshot.exists) throw Exception("Booking not found");
+      
+      final data = snapshot.data()!;
+      if (data['status'] != 'pending') {
+        throw Exception("Only pending bookings can be rejected");
+      }
+      
+      transaction.update(docRef, {
+        'status': 'declined',
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    });
+  }
+
   static Future<void> delete(String id) async {
     await _col.doc(id).delete();
   }

@@ -25,6 +25,8 @@ class AllocationModel {
     required this.createdAt,
   });
 
+  String get id => allocationId;
+
   factory AllocationModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>? ?? {};
     return AllocationModel(

@@ -5,6 +5,7 @@ import '../../services/firestore/vendor_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../core/database/collections.dart';
 import '../../core/firebase/firestore_config.dart';
+import '../../services/admin_api_service.dart';
 
 class AdminVendorsTab extends StatefulWidget {
   const AdminVendorsTab({super.key});
@@ -129,19 +130,37 @@ class _AdminVendorsTabState extends State<AdminVendorsTab> {
               IconButton(
                 icon: const Icon(Icons.verified, color: Colors.green),
                 tooltip: 'Verify Vendor',
-                onPressed: () => VendorRepository.updateVendor(vendor.copyWith(verified: true)),
+                onPressed: () async {
+                  try {
+                    await AdminApiService.verifyVendor(vendor.vendorId);
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                  }
+                },
               ),
             if (vendor.status != 'active')
               IconButton(
                 icon: const Icon(Icons.play_arrow, color: Colors.blue),
                 tooltip: 'Activate',
-                onPressed: () => VendorRepository.updateVendor(vendor.copyWith(status: 'active')),
+                onPressed: () async {
+                  try {
+                    await AdminApiService.changeVendorStatus(vendor.vendorId, 'active');
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                  }
+                },
               ),
             if (vendor.status == 'active')
               IconButton(
                 icon: const Icon(Icons.pause, color: Colors.orange),
                 tooltip: 'Suspend',
-                onPressed: () => VendorRepository.updateVendor(vendor.copyWith(status: 'suspended')),
+                onPressed: () async {
+                  try {
+                    await AdminApiService.changeVendorStatus(vendor.vendorId, 'suspended');
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                  }
+                },
               ),
             IconButton(
               icon: const Icon(Icons.edit, color: Colors.white70),

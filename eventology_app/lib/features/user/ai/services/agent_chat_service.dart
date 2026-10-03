@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import '../models/agent_models.dart';
+import '../../../../core/config/api_config.dart';
 
 class AgentChatService {
-  // Use 10.0.2.2 for Android emulator, or actual IP for physical device
-  final String baseUrl = 'http://10.0.2.2:3000/api/agent';
+  // Unified backend URL for all local platforms
+  final String baseUrl = '${ApiConfig.baseUrl}/api/agent';
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;

@@ -123,4 +123,9 @@ class VendorModel {
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
+
+  String get id => vendorId;
+  List<String> get mediaGallery => portfolioImages ?? [];
+  String? get vendorType => categoryIds.isNotEmpty ? categoryIds.first : null;
+  double? get basePrice => 0.0; // Placeholder for basePrice
 }

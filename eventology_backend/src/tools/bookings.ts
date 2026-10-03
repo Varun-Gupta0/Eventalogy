@@ -3,6 +3,44 @@ import { z } from "zod";
 import { db } from "../config/firebase";
 import { FieldValue, Timestamp } from "firebase-admin/firestore";
 
+// ─── Create Event ──────────────────────────────────────────────────────────────
+
+export const createEventTool = tool(
+  async ({ customerId, title, eventDateStr, guestCount, budget, requirements }) => {
+    try {
+      const ref = db.collection("events").doc();
+      await ref.set({
+        eventId: ref.id,
+        customerId,
+        title,
+        eventDate: Timestamp.fromDate(new Date(eventDateStr)),
+        guestCount: guestCount ?? null,
+        budget: budget ?? null,
+        requirements: requirements ?? {},
+        status: "planned",
+        paymentStatus: "unpaid",
+        createdAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      return JSON.stringify({ success: true, eventId: ref.id });
+    } catch (err: any) {
+      return JSON.stringify({ error: `Create event failed: ${err.message}` });
+    }
+  },
+  {
+    name: "create_event",
+    description: "Create an event record in Firestore. This MUST be called before creating bookings or enquiries. Returns the new eventId.",
+    schema: z.object({
+      customerId: z.string().describe("The customer (user) ID"),
+      title: z.string().describe("Title of the event"),
+      eventDateStr: z.string().describe("Event date in ISO format"),
+      guestCount: z.number().optional().describe("Expected number of guests"),
+      budget: z.number().optional().describe("Estimated budget in INR"),
+      requirements: z.record(z.string(), z.any()).optional().describe("General requirements dictionary"),
+    }),
+  }
+);
+
 // ─── Create Enquiry ────────────────────────────────────────────────────────────
 // Signals vendor intent before committing a booking
 

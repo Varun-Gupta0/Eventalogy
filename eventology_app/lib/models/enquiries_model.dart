@@ -87,4 +87,7 @@ class EnquiryModel {
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
+
+  String get id => enquiryId;
+  Timestamp get targetDate => requestedDate;
 }

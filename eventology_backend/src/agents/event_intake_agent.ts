@@ -113,10 +113,19 @@ ${JSON.stringify(state.eventRequirements, null, 2)}`;
 
     // If the model completely ignored the submit tool and just gave text, fallback gracefully
     if (!finalExtraction) {
+      let parsedQuestion = fallbackText;
+      if (fallbackText && fallbackText.trim().startsWith('{')) {
+        try {
+          const parsed = JSON.parse(fallbackText);
+          if (parsed.nextQuestion) parsedQuestion = parsed.nextQuestion;
+        } catch (e) {
+          // ignore parse errors
+        }
+      }
       finalExtraction = {
         extractedRequirements: state.eventRequirements || {},
         missingInformation: ["Unknown (fallback)"],
-        nextQuestion: fallbackText || "Could you provide more details?",
+        nextQuestion: parsedQuestion || "Could you provide more details?",
         isComplete: false,
         confidence: 0,
       };

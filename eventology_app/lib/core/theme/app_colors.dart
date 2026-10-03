@@ -9,6 +9,7 @@ class AppColors {
   static const Color background = Color(0xFF111111); // dark-900
   static const Color surface = Color(0xFF1F1F1F); // dark-800
   static const Color surfaceLighter = Color(0xFF2D2D2D); // dark-700
+  static const Color surfaceHighlight = Color(0xFF333333); // A slightly lighter surface
   
   static const Color error = Color(0xFFCF6679);
   

@@ -4,10 +4,11 @@ import { getLLMProvider } from "../llm/provider";
 import { logAgentAction } from "../services/agent_log_service";
 import { createAgentTask, updateAgentTaskStatus } from "../services/agent_task_service";
 import { executeTool } from "../utils/tool_executor";
-import { createEnquiryTool, createBookingTool, createAllocationTool } from "../tools/bookings";
+import { createEventTool, createEnquiryTool, createBookingTool, createAllocationTool } from "../tools/bookings";
 import type { StateType } from "../graph/state";
 
 const BookingOutputSchema = z.object({
+  createdEventId: z.string().optional(),
   createdEnquiryIds: z.array(z.string()),
   createdBookingIds: z.array(z.string()),
   createdAllocationIds: z.array(z.string()),
@@ -38,33 +39,38 @@ export async function bookingAgentNode(state: StateType): Promise<Partial<StateT
   await logAgentAction(state.workflowId, "booking_agent", "start", "running");
   const taskId = await createAgentTask(state.workflowId, "booking_agent", "running", { approvedBy: state.userId }, false);
 
-  const tools = [createEnquiryTool, createBookingTool, createAllocationTool];
+  const tools = [createEventTool, createEnquiryTool, createBookingTool, createAllocationTool];
   const llm = getLLMProvider({ temperature: 0.0 }).bindTools(tools);
 
   const approval = state.pendingApprovals?.[0];
   const dateStr = state.eventRequirements.dateStr ?? new Date().toISOString().split("T")[0];
   const endTimeStr = new Date(new Date(dateStr).getTime() + 8 * 60 * 60 * 1000).toISOString();
+  
+  const title = state.eventRequirements.eventType ? `${state.eventRequirements.eventType} Event` : "My Event";
+  const guestCount = state.eventRequirements.guestCount ?? 50;
+  const budget = state.budgetBreakdown?.totalEstimatedCost ?? 0;
 
   const systemPrompt = `You are the Eventology Booking Agent.
 
-User approval has been confirmed. Your job is to create booking records in Firestore.
+User approval has been confirmed. Your job is to create event and booking records in Firestore.
 
 APPROVAL VERIFIED:
 - Approved venue: ${approval?.recommendedVenueId ?? "none"}
 - Approved vendors: ${(approval?.recommendedVendors ?? []).map((v: any) => `${v.vendorId} (${v.serviceCategory})`).join(", ")}
 - Event date: ${dateStr}
 - Customer userId: ${state.userId}
-- Event ID: ${state.eventId ?? "none"}
+- Pending Event ID: ${state.eventId ?? "none"}
 
 Steps to execute:
-1. For each approved vendor+service: first use create_enquiry, then create_booking
-2. If a venue is selected, use create_allocation to link it to the event
-3. For each vendor, use create_allocation to link them
-4. Record all created IDs carefully
+1. FIRST, call create_event to create the event in Firestore (unless an eventId already exists and is not "none"). This returns the REAL eventId.
+2. For each approved vendor+service: first use create_enquiry (with the REAL eventId), then create_booking (with the REAL eventId)
+3. If a venue is selected, use create_allocation to link it to the REAL eventId
+4. For each vendor, use create_allocation to link them to the REAL eventId
+5. Record all created IDs carefully
 
 Rules:
 - Use userId ${state.userId} as customerId
-- Use eventId ${state.eventId ?? "pending"} for all records
+- Use the eventId returned by create_event for all subsequent records
 - assignedBy for allocations: ${state.workflowId}
 - Do NOT create duplicate records
 - Skip items where required data is missing rather than creating invalid records
@@ -73,7 +79,7 @@ CRITICAL: When you have finished gathering information and reasoning, you MUST c
 
   const messages: any[] = [
     new SystemMessage(systemPrompt),
-    new HumanMessage(`Create bookings for: Venue=${approval?.recommendedVenueId}, Vendors=${JSON.stringify(approval?.recommendedVendors)}, Date=${dateStr}`),
+    new HumanMessage(`Create event and bookings for: Title=${title}, Guests=${guestCount}, Budget=${budget}, Venue=${approval?.recommendedVenueId}, Vendors=${JSON.stringify(approval?.recommendedVendors)}, Date=${dateStr}`),
   ];
 
   try {
@@ -123,6 +129,7 @@ CRITICAL: When you have finished gathering information and reasoning, you MUST c
 
     if (!finalExtraction) {
       finalExtraction = {
+        createdEventId: undefined,
         createdEnquiryIds: [],
         createdBookingIds: [],
         createdAllocationIds: [],
@@ -134,16 +141,17 @@ CRITICAL: When you have finished gathering information and reasoning, you MUST c
     const output = finalExtraction;
 
     await updateAgentTaskStatus(taskId, "completed", output);
-    await logAgentAction(state.workflowId, "booking_agent", "complete", "success", { enquiries: output.createdEnquiryIds.length, bookings: output.createdBookingIds.length, durationMs: Date.now() - startTime });
+    await logAgentAction(state.workflowId, "booking_agent", "complete", "success", { eventId: output.createdEventId, enquiries: output.createdEnquiryIds.length, bookings: output.createdBookingIds.length, durationMs: Date.now() - startTime });
 
     return {
+      eventId: output.createdEventId ?? state.eventId,
       createdEnquiryIds: output.createdEnquiryIds,
       createdBookingIds: output.createdBookingIds,
       createdAllocationIds: output.createdAllocationIds,
       currentAgent: "orchestrator_agent",
       currentStage: "booking",
       workflowStatus: "active",
-      agentHistory: [{ agent: "booking_agent", stage: "booking", status: "success", startedAt: new Date(startTime).toISOString(), durationMs: Date.now() - startTime, notes: `Created ${output.createdBookingIds.length} bookings, ${output.createdEnquiryIds.length} enquiries, ${output.createdAllocationIds.length} allocations` }],
+      agentHistory: [{ agent: "booking_agent", stage: "booking", status: "success", startedAt: new Date(startTime).toISOString(), durationMs: Date.now() - startTime, notes: `Created event ${output.createdEventId}, ${output.createdBookingIds.length} bookings, ${output.createdEnquiryIds.length} enquiries, ${output.createdAllocationIds.length} allocations` }],
       completedTasks: ["booking_agent"],
     };
   } catch (err: any) {

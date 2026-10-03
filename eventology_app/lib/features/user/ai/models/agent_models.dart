@@ -25,6 +25,8 @@ class PendingApproval {
   final String status;
   final String? venue;
   final int vendorCount;
+  final List<dynamic>? recommendedVendors;
+  final Map<String, dynamic>? budgetBreakdown;
 
   PendingApproval({
     required this.approvalId,
@@ -33,6 +35,8 @@ class PendingApproval {
     required this.status,
     this.venue,
     required this.vendorCount,
+    this.recommendedVendors,
+    this.budgetBreakdown,
   });
 
   factory PendingApproval.fromJson(Map<String, dynamic> json) {
@@ -43,6 +47,8 @@ class PendingApproval {
       status: json['status'] as String? ?? 'pending',
       venue: json['venue'] as String?,
       vendorCount: json['vendorCount'] as int? ?? 0,
+      recommendedVendors: json['recommendedVendors'] as List<dynamic>?,
+      budgetBreakdown: json['budgetBreakdown'] as Map<String, dynamic>?,
     );
   }
 }
@@ -59,6 +65,7 @@ class AgentWorkflowState {
   final Map<String, dynamic>? budgetBreakdown;
   final String? approvalStatus;
   final List<PendingApproval> pendingApprovals;
+  final List<dynamic>? recommendations;
   final String? lastError;
   final List<AgentMessage> messages;
 
@@ -74,6 +81,7 @@ class AgentWorkflowState {
     this.budgetBreakdown,
     this.approvalStatus,
     this.pendingApprovals = const [],
+    this.recommendations,
     this.lastError,
     this.messages = const [],
   });
@@ -94,6 +102,7 @@ class AgentWorkflowState {
               ?.map((e) => PendingApproval.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      recommendations: json['recommendations'] as List<dynamic>?,
       lastError: json['lastError'] as String?,
       messages: (json['messages'] as List<dynamic>?)
               ?.map((e) => AgentMessage.fromJson(e as Map<String, dynamic>))

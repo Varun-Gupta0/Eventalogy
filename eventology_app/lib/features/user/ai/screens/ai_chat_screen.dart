@@ -36,6 +36,7 @@ class _AIChatScreenState extends State<AIChatScreen> {
 
   Future<void> _sendMessage(String text) async {
     if (text.trim().isEmpty) return;
+    if (_isThinking) return;
     
     final userText = text.trim();
     _textController.clear();
@@ -69,6 +70,7 @@ class _AIChatScreenState extends State<AIChatScreen> {
 
   Future<void> _handleApproval(bool approved, String note) async {
     if (_conversationId == null) return;
+    if (_isThinking) return;
     
     setState(() {
       _isThinking = true;
@@ -134,45 +136,65 @@ class _AIChatScreenState extends State<AIChatScreen> {
         stageName: _getFriendlyStageName(_currentState?.currentStage),
         onBackPressed: () => context.pop(),
       ),
-      body: Column(
-        children: [
-          if (_error != null) 
-            ErrorMessageCard(
-              error: _error!,
-              onDismiss: () => setState(() => _error = null),
-            ),
-          Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              itemCount: _messages.length + (_isThinking ? 1 : 0) + (needsApproval ? 1 : 0),
-              itemBuilder: (context, index) {
-                if (index < _messages.length) {
-                  final msg = _messages[index];
-                  if (msg.role == 'user') {
-                    return UserMessageBubble(content: msg.content);
-                  } else {
-                    return AIMessageBubble(content: msg.content);
-                  }
-                } else if (_isThinking && index == _messages.length) {
-                  return ThinkingIndicator(
-                    stageName: _getFriendlyStageName(_currentState?.currentStage)
-                  );
-                } else if (needsApproval) {
-                   return ApprovalRequestCard(
-                     approval: _currentState!.pendingApprovals.first,
-                     onRespond: _handleApproval,
-                   );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 900), // Desktop responsiveness limit
+          child: Column(
+            children: [
+              if (_error != null) 
+                ErrorMessageCard(
+                  error: _error!,
+                  onDismiss: () => setState(() => _error = null),
+                ),
+              Expanded(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  itemCount: _messages.length + (_isThinking ? 1 : 0) + (needsApproval ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index < _messages.length) {
+                      final msg = _messages[index];
+                      if (msg.role == 'user') {
+                        return UserMessageBubble(content: msg.content);
+                      } else {
+                        return AIMessageBubble(content: msg.content);
+                      }
+                    } else if (_isThinking && index == _messages.length) {
+                      return ThinkingIndicator(
+                        stageName: _getFriendlyStageName(_currentState?.currentStage)
+                      );
+                    } else if (needsApproval) {
+                       return Container(
+                         margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                         child: ElevatedButton(
+                           onPressed: () {
+                             context.push('/plan-review', extra: {
+                               'conversationId': _conversationId,
+                               'state': _currentState,
+                             });
+                           },
+                           style: ElevatedButton.styleFrom(
+                             padding: const EdgeInsets.symmetric(vertical: 16),
+                             backgroundColor: AppColors.primary,
+                             foregroundColor: Colors.black,
+                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                           ),
+                           child: const Text('Review Event Plan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                         ),
+                       );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
+              ),
+              AIChatInputBox(
+                controller: _textController,
+                onSend: _sendMessage,
+                isThinking: _isThinking,
+              ),
+            ],
           ),
-          AIChatInputBox(
-            controller: _textController,
-            onSend: _sendMessage,
-          ),
-        ],
+        ),
       ),
     );
   }

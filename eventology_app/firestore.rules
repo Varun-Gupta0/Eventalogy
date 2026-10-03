@@ -214,5 +214,22 @@ service cloud.firestore {
     match /settings/{settingId} {
       allow read, write: if isAdmin();
     }
+
+    // ── WHATSAPP INTEGRATION ────────────────────────────────────────────────────
+
+    // whatsapp_identities/{waId}
+    // Backend-only: all mutations happen via Firebase Admin SDK in the backend.
+    // Clients (Flutter) cannot read or write identity mapping directly.
+    // Admin can inspect for debugging but cannot write (prevents UI-based manipulation).
+    match /whatsapp_identities/{waId} {
+      allow read: if isAdmin();
+      allow write: if false; // Backend Admin SDK only
+    }
+
+    // whatsapp_processed_messages/{messageId}
+    // Deduplication store — backend-only, no client access.
+    match /whatsapp_processed_messages/{messageId} {
+      allow read, write: if false; // Backend Admin SDK only
+    }
   }
 }

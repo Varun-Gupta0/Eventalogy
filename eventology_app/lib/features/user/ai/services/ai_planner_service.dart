@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../../../models/ai/models.dart';
 
+import '../../../../core/config/api_config.dart';
+
 abstract class AIPlannerService {
   Future<AIGeneratedPlan> generatePlan(AIEventPlanRequest request);
 }
 
 class OpenRouterAIPlannerServiceImpl implements AIPlannerService {
-  final String backendUrl = 'http://10.0.2.2:3000/api/ai/generate-event-plan'; // 10.0.2.2 for Android Emulator
+  final String backendUrl = '${ApiConfig.baseUrl}/api/ai/generate-event-plan';
 
   @override
   Future<AIGeneratedPlan> generatePlan(AIEventPlanRequest request) async {

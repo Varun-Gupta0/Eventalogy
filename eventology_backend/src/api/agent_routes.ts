@@ -25,7 +25,7 @@ function extractPublicState(state: any) {
     eventRequirements: state.eventRequirements,
     pendingQuestions: state.pendingQuestions,
     missingInformation: state.missingInformation,
-    eventPlan: state.eventPlan ? { title: state.eventPlan.title, summary: state.eventPlan.summary } : null,
+    eventPlan: state.eventPlan,
     candidateVenueCount: (state.candidateVenues ?? []).length,
     candidateVendorCount: (state.candidateVendors ?? []).length,
     availableVenueCount: (state.availableVenueIds ?? []).length,
@@ -40,6 +40,8 @@ function extractPublicState(state: any) {
       status: a.status,
       venue: a.recommendedVenueName,
       vendorCount: a.recommendedVendors?.length ?? 0,
+      recommendedVendors: a.recommendedVendors ?? [],
+      budgetBreakdown: a.budgetBreakdown,
     })),
     createdBookingIds: state.createdBookingIds,
     createdEnquiryIds: state.createdEnquiryIds,
@@ -47,11 +49,50 @@ function extractPublicState(state: any) {
     completedTasks: state.completedTasks,
     lastError: state.lastError,
     agentHistory: (state.agentHistory ?? []).slice(-10),
-    messages: (state.conversationHistory ?? []).map((m: any) => ({
-      role: m._getType() === 'human' ? 'user' : m._getType() === 'ai' ? 'assistant' : m._getType(),
-      content: m.content,
-      id: m.id
-    }))
+    messages: (state.conversationHistory ?? []).map((m: any) => {
+      let rawContent = m.content;
+      if (rawContent === undefined && m.kwargs?.content !== undefined) {
+        rawContent = m.kwargs.content;
+      }
+
+      let typeStr = '';
+      if (typeof m._getType === 'function') {
+        typeStr = m._getType();
+      } else if (Array.isArray(m.id) && m.id.length > 0) {
+        const lastId = m.id[m.id.length - 1];
+        if (lastId === 'HumanMessage') typeStr = 'human';
+        else if (lastId === 'AIMessage') typeStr = 'ai';
+        else typeStr = String(lastId).toLowerCase();
+      } else {
+        typeStr = m.role || m.type || '';
+      }
+
+      let role = 'assistant';
+      if (typeStr === 'human' || typeStr === 'user') {
+        role = 'user';
+      } else if (typeStr === 'ai' || typeStr === 'assistant') {
+        role = 'assistant';
+      }
+
+      let content: string;
+      if (typeof rawContent === 'string') {
+        content = rawContent;
+      } else if (Array.isArray(rawContent)) {
+        content = rawContent
+          .map((part: any) => (typeof part === 'string' ? part : part?.text ?? part?.content ?? ''))
+          .join('');
+      } else {
+        content = String(rawContent ?? '');
+      }
+
+      const msgId = typeof m.id === 'string' ? m.id : (m.kwargs?.id ?? undefined);
+
+      return {
+        role,
+        content,
+        id: msgId,
+      };
+    })
   };
 }
 

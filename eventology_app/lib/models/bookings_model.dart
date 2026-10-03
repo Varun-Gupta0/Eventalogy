@@ -99,4 +99,8 @@ class BookingModel {
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
+
+  String get id => bookingId;
+  double get totalAmount => amount;
+  Timestamp get targetDate => bookingDate;
 }

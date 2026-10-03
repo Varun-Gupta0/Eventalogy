@@ -94,28 +94,31 @@ class UserMessageBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Flexible(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: const Color(0xFF2A2A2E),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(4),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2A2A2E),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                    bottomRight: Radius.circular(4),
+                  ),
+                  border: Border.all(color: AppColors.glassBorder),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    )
+                  ],
                 ),
-                border: Border.all(color: AppColors.glassBorder),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  )
-                ],
-              ),
-              child: Text(
-                content,
-                style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.5, fontWeight: FontWeight.w500),
+                child: Text(
+                  content,
+                  style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.5, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
           ),
@@ -136,11 +139,11 @@ class AIMessageBubble extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(right: 8, bottom: 4),
-            padding: const EdgeInsets.all(6),
+            margin: const EdgeInsets.only(right: 12, top: 4),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.surface,
@@ -149,33 +152,31 @@ class AIMessageBubble extends StatelessWidget {
             child: const Icon(Icons.smart_toy, color: AppColors.primary, size: 16),
           ),
           Flexible(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1C1C1F),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(4),
-                  bottomRight: Radius.circular(16),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800), // P2: Desktop responsiveness
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1C1C1F),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                    bottomLeft: Radius.circular(4),
+                    bottomRight: Radius.circular(16),
+                  ),
+                  border: Border.all(color: AppColors.glassBorder),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    )
+                  ],
                 ),
-                border: const Border(
-                  left: BorderSide(color: AppColors.primary, width: 2),
-                  top: BorderSide(color: AppColors.glassBorder),
-                  right: BorderSide(color: AppColors.glassBorder),
-                  bottom: BorderSide(color: AppColors.glassBorder),
+                child: Text(
+                  content.isEmpty ? "..." : content, // Fallback if empty
+                  style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.5, fontWeight: FontWeight.w500),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  )
-                ],
-              ),
-              child: Text(
-                content,
-                style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.5, fontWeight: FontWeight.w500),
               ),
             ),
           ),
@@ -358,11 +359,13 @@ class ApprovalRequestCard extends StatelessWidget {
 class AIChatInputBox extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onSend;
+  final bool isThinking;
 
   const AIChatInputBox({
     super.key,
     required this.controller,
     required this.onSend,
+    this.isThinking = false,
   });
 
   @override
@@ -371,7 +374,7 @@ class AIChatInputBox extends StatelessWidget {
       padding: EdgeInsets.only(
         left: 16,
         right: 16,
-        top: 12,
+        top: 16,
         bottom: MediaQuery.of(context).padding.bottom + 16,
       ),
       decoration: BoxDecoration(
@@ -390,11 +393,12 @@ class AIChatInputBox extends StatelessWidget {
               ),
               child: TextField(
                 controller: controller,
+                enabled: !isThinking,
                 style: const TextStyle(color: Colors.white, fontSize: 15),
                 minLines: 1,
                 maxLines: 4,
                 textInputAction: TextInputAction.send,
-                onSubmitted: onSend,
+                onSubmitted: isThinking ? null : onSend,
                 decoration: const InputDecoration(
                   hintText: 'Type your response...',
                   hintStyle: TextStyle(color: AppColors.textSecondary, fontSize: 15),
@@ -406,14 +410,14 @@ class AIChatInputBox extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           GestureDetector(
-            onTap: () => onSend(controller.text),
+            onTap: isThinking ? null : () => onSend(controller.text),
             child: Container(
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: isThinking ? AppColors.glassBorder : AppColors.primary,
                 shape: BoxShape.circle,
-                boxShadow: [
+                boxShadow: isThinking ? null : [
                   BoxShadow(
                     color: AppColors.primary.withOpacity(0.3),
                     blurRadius: 12,
