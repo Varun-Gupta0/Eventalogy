@@ -143,10 +143,8 @@ service cloud.firestore {
     // payments/{paymentId}
     match /payments/{paymentId} {
       allow read: if isAdmin()
-        || (isAuthenticated() && resource.data.customerId == request.auth.uid);
-      allow create: if isAuthenticated()
-        && request.resource.data.customerId == request.auth.uid;
-      allow update, delete: if isAdmin();
+        || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow create, update, delete: if false; // Backend Admin SDK only
     }
 
     // reviews/{reviewId}

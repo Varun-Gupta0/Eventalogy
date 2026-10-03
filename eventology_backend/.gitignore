@@ -1,4 +1,26 @@
-node_modules
-dist
+node_modules/
+dist/
+coverage/
+
+# Secrets
 .env
+.env.*
+!.env.example
+*.pem
 serviceAccountKey.json
+service-account*.json
+firebase-service-account*.json
+credential*.json
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Agent/Tool
+.system_generated/
+brain/

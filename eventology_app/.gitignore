@@ -50,3 +50,20 @@ app.*.map.json
 # Firebase Service Account Credentials
 serviceAccountKey.json
 *-adminsdk-*.json
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+service-account*.json
+firebase-service-account*.json
+credential*.json
+
+# Android
+.gradle/
+local.properties
+
+# Agent/Tool
+.system_generated/
+brain/

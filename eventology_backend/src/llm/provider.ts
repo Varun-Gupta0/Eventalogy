@@ -40,7 +40,7 @@ export function getLLMProvider(options?: LLMProviderOptions) {
     configuration: {
       baseURL: "https://openrouter.ai/api/v1",
       defaultHeaders: {
-        "HTTP-Referer": "http://localhost:3000",
+        "HTTP-Referer": process.env.EVENTOLOGY_WEB_URL || "http://localhost:3000",
         "X-Title": "Eventology AI Agent Runtime"
       }
     }
